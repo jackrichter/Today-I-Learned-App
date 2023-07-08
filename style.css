@@ -1,21 +1,30 @@
 * {
   /* Global selector */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background-color: #1c1917;
   color: #fafaf9;
   font-family: "Sono", sans-serif;
+  padding: 40px;
+}
+
+.header {
+  margin-bottom: 40px;
 }
 
 .fact-form {
   background-color: #44403c;
+  margin-bottom: 40px;
+  padding: 16px 40px;
 }
 
 h1 {
   font-size: 42px;
   text-transform: uppercase;
-  text-align: center;
   font-family: "Coiny", sans-serif;
 }
 
@@ -23,6 +32,8 @@ h1 {
   font-size: 20px;
   line-height: -0.2%;
   background-color: #44403c;
+  margin-bottom: 16px;
+  padding: 16px 24px;
 }
 
 .tag {
