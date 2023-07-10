@@ -15,19 +15,19 @@ body {
 .header {
   margin-bottom: 40px;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; /* Sets the Html header elemecnt as a flex-box */
+  align-items: center; /* Vertical alignment */
+  justify-content: space-between; /* Horizontal alignment */
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: flex; /* Make this a flex-box */
+  align-items: center; /* Vertical alignment */
+  gap: 16px; /* A flex-box property to aid in putting some space between elements in the same flex-box  */
 }
 
 .fact-form {
-  /* Form is a block element. Notice that there is space available for text-align center*/
+  /* Form is a block element. Notice that there is space available for text-align center */
   background-color: #44403c;
   margin-bottom: 40px;
   padding: 16px 40px;
@@ -49,6 +49,11 @@ h1 {
   background-color: #44403c;
   margin-bottom: 16px;
   padding: 16px 24px;
+  letter-spacing: -1;
+
+  display: flex; /* Make this container a flex-box */
+  align-items: center; /* Vertical alignment */
+  gap: 24px; /* Give some space between elements */
 }
 
 .tag {
@@ -59,6 +64,10 @@ h1 {
   padding-top: 3px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.vote-buttons {
+  margin-left: auto;
 }
 
 ul {
