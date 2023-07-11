@@ -9,10 +9,15 @@ body {
   background-color: #1c1917;
   color: #fafaf9;
   font-family: "Sono", sans-serif;
-  padding: 40px;
+  padding: 48px 64px;
 }
 
 /* Main Layout */
+
+.container {
+  max-width: 1500px; /* Helps when the view is samll as in a mobile */
+  margin: 0 auto; /* Centering the whole content in the page: 0 top-botttom, auto to the left and right */
+}
 
 .header {
   margin-bottom: 40px;
@@ -42,6 +47,11 @@ body {
   display: flex; /* Make this a flex-box */
   align-items: center; /* Vertical alignment */
   gap: 16px; /* A flex-box property to aid in putting some space between elements in the same flex-box  */
+}
+
+.logo img {
+  width: 68px;
+  height: 68px;
 }
 
 h1 {
