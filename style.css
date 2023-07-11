@@ -12,6 +12,8 @@ body {
   padding: 40px;
 }
 
+/* Main Layout */
+
 .header {
   margin-bottom: 40px;
 
@@ -20,18 +22,26 @@ body {
   justify-content: space-between; /* Horizontal alignment */
 }
 
-.logo {
-  display: flex; /* Make this a flex-box */
-  align-items: center; /* Vertical alignment */
-  gap: 16px; /* A flex-box property to aid in putting some space between elements in the same flex-box  */
-}
-
 .fact-form {
   /* Form is a block element. Notice that there is space available for text-align center */
   background-color: #44403c;
   margin-bottom: 40px;
   padding: 16px 40px;
   text-align: center;
+}
+
+.main {
+  display: grid; /* Make Main container have grid layout */
+  grid-template-columns: 250px 1fr; /* Two colums whe the second one occupies all remaining space */
+  gap: 48px;
+}
+
+/* Elements */
+
+.logo {
+  display: flex; /* Make this a flex-box */
+  align-items: center; /* Vertical alignment */
+  gap: 16px; /* A flex-box property to aid in putting some space between elements in the same flex-box  */
 }
 
 h1 {
