@@ -93,3 +93,17 @@ h1 {
 ul {
   list-style-type: none;
 }
+
+/* Using pseudo-classes while styling the links */
+.source,
+.source:visited {
+  color: #a1a1aa;
+  text-decoration: none; /* Remove the underline */
+  margin-left: 12px;
+  transition: 0.3s; /* Wait a litle time before changing to hovered */
+}
+
+.source:hover,
+.source:active {
+  color: #3b82f6;
+}
