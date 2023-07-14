@@ -6,14 +6,13 @@
 }
 
 body {
-  background-color: #1c1917;
+  background-color: #1c1917; /* Colors from Tailwind Colors CSS */
   color: #fafaf9;
   font-family: "Sono", sans-serif;
   padding: 48px 64px;
 }
 
 /* Main Layout */
-
 .container {
   max-width: 1500px; /* Helps when the view is samll as in a mobile */
   margin: 0 auto; /* Centering the whole content in the page: 0 top-botttom, auto to the left and right */
