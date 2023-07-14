@@ -31,8 +31,11 @@ body {
   /* Form is a block element. Notice that there is space available for text-align center */
   background-color: #44403c;
   margin-bottom: 40px;
-  padding: 16px 40px;
-  text-align: center;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 16px;
 }
 
 .main {
@@ -74,6 +77,7 @@ h1 {
   margin-bottom: 16px;
   padding: 16px 24px;
   letter-spacing: -1;
+  border-radius: 16px;
 
   display: flex; /* Make this container a flex-box */
   align-items: center; /* Vertical alignment */
@@ -168,4 +172,30 @@ ul {
   width: 100%;
   background-image: none; /* Disable the gradient background-image */
   height: 35px;
+}
+
+.fact-form input,
+.fact-form select {
+  width: 230px;
+  background-color: #78716c;
+  border: none;
+  border-radius: 100px;
+  padding: 16px;
+  font-size: 18px;
+  color: inherit;
+  font-family: inherit;
+}
+
+.fact-form input::placeholder {
+  color: #a8a29e;
+}
+
+.fact-form input:first-child {
+  flex-grow: 1;
+}
+
+.fact-form span {
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 18px;
 }
