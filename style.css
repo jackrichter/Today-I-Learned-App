@@ -12,6 +12,10 @@ body {
   padding: 48px 64px;
 }
 
+.hidden {
+  display: none !important; /* Used for hidding the Form */
+}
+
 /* Main Layout */
 .container {
   max-width: 1500px; /* Helps when the view is samll as in a mobile */
