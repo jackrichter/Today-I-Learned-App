@@ -1,5 +1,3 @@
-console.log("Hello World!");
-
 const btn = document.querySelector(".btn-open");
 const form = document.querySelector(".fact-form");
 
