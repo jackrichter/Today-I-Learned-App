@@ -42,7 +42,6 @@ const CATEGORIES = [
   { name: "history", color: "#f97316" },
   { name: "news", color: "#8b5cf6" },
 ];
-console.log();
 
 // Selecting DOM elements
 const btn = document.querySelector(".btn-open");
