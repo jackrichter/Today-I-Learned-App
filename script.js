@@ -42,6 +42,7 @@ const CATEGORIES = [
   { name: "history", color: "#f97316" },
   { name: "news", color: "#8b5cf6" },
 ];
+console.log();
 
 // Selecting DOM elements
 const btn = document.querySelector(".btn-open");
@@ -83,7 +84,9 @@ function createFactsList(dataArray) {
       </p>
       <span 
         class="tag" 
-        style="background-color: #3b82f6;">${fact.category}</span>
+        style="background-color: ${
+          CATEGORIES.find((cat) => cat.name === fact.category).color
+        }">${fact.category}</span>
     </li>`
   );
   // console.log(htmlArr);
