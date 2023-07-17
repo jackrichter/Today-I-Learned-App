@@ -50,7 +50,25 @@ const factList = document.querySelector(".fact-list");
 
 // Create DOM elements: Render facts in List
 factList.innerHTML = ""; // Clean out existing HTML inside of the facts list
-createFactsList(initialFacts);
+
+// Load data from Supabase (database)
+loadFacts();
+
+async function loadFacts() {
+  const res = await fetch(
+    "https://wzcsfsnuwoqpbujxchsk.supabase.co/rest/v1/facts",
+    {
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6Y3Nmc251d29xcGJ1anhjaHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODkzNzk3MTMsImV4cCI6MjAwNDk1NTcxM30.PwanSOBJ4-qqAtejBPOfPLCDwwCZJoMDWFg7eu90bk8",
+        authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6Y3Nmc251d29xcGJ1anhjaHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODkzNzk3MTMsImV4cCI6MjAwNDk1NTcxM30.PwanSOBJ4-qqAtejBPOfPLCDwwCZJoMDWFg7eu90bk8",
+      },
+    }
+  );
+  const data = await res.json();
+  createFactsList(data);
+}
 
 function createFactsList(dataArray) {
   const htmlArr = dataArray.map(
