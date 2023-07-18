@@ -91,37 +91,45 @@ function FactsList() {
     <section>
       <ul className="fact-list">
         {facts.map((fact) => (
-          <li key={fact.id} className="fact">
-            <p>
-              {fact.text}
-              <a
-                className="source"
-                href={fact.source}
-                target="_blank"
-                rel="noreferrer"
-              >
-                (Source)
-              </a>
-            </p>
-            <span
-              className="tag"
-              style={{
-                backgroundColor: CATEGORIES.find(
-                  (cat) => cat.name === fact.category
-                ).color,
-              }}
-            >
-              {fact.category}
-            </span>
-            <div className="vote-buttons">
-              <button>👍{fact.votesInteresting}</button>
-              <button>🤯{fact.votesMindblowing}</button>
-              <button>⛔{fact.votesFalse}</button>
-            </div>
-          </li>
+          <Fact key={fact.id} fact={fact} /> // JSX elements directly inside a map() call always need keys! // There must be a unique key for each fact!
         ))}
       </ul>
+      <p>There are {facts.length} facts currently in the database.</p>
     </section>
+  );
+}
+
+// Passing props (and using JS destructuring) to a component
+function Fact({ fact }) {
+  // <=> const { fact } = props; <=> const fact = props.fact;
+  return (
+    <li className="fact">
+      <p>
+        {fact.text}
+        <a
+          className="source"
+          href={fact.source}
+          target="_blank"
+          rel="noreferrer"
+        >
+          (Source)
+        </a>
+      </p>
+      <span
+        className="tag"
+        style={{
+          backgroundColor: CATEGORIES.find((cat) => cat.name === fact.category)
+            .color,
+        }}
+      >
+        {fact.category}
+      </span>
+      <div className="vote-buttons">
+        <button>👍{fact.votesInteresting}</button>
+        <button>🤯{fact.votesMindblowing}</button>
+        <button>⛔{fact.votesFalse}</button>
+      </div>
+    </li>
   );
 }
 
