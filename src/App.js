@@ -46,7 +46,8 @@ const initialFacts = [
   },
 ];
 
-function Counter() {
+// Using State example
+/* function Counter() {
   const [count, setCount] = useState(0);
   return (
     <div>
@@ -59,11 +60,18 @@ function Counter() {
       </button>
     </div>
   );
-}
+} */
 
 // Each function in JSX is a component. App is allways the first component.
 function App() {
+  // Using State three steps: 1. Defile State variable
+  const [showForm, setShowForm] = useState(false);
+
   const appTitle = "Today I Learned";
+
+  const onToggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   return (
     <>
@@ -78,11 +86,19 @@ function App() {
           />
           <h1>{appTitle}</h1>
         </div>
-        <button className="btn btn-large btn-open">Share A Fact</button>
+        <button
+          className="btn btn-large btn-open"
+          // 3. Update State variable
+          // onClick={setShowForm((show) => !show)} OBS! Throws rendering error!
+          //onClick={() => (showForm ? setShowForm(false) : setShowForm(true))} OBS! This works!
+          onClick={onToggleForm}
+        >
+          Share A Fact
+        </button>
       </header>
 
-      <NewFactForm />
-      <Counter />
+      {/* 2. Use State variable */}
+      {showForm ? <NewFactForm /> : null}
 
       <main className="main">
         <CategoryFilter />
