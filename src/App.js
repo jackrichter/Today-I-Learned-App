@@ -64,40 +64,12 @@ const initialFacts = [
 
 // Each function in JSX is a component. App is allways the first component.
 function App() {
-  // Using State three steps: 1. Defile State variable
   const [showForm, setShowForm] = useState(false);
-
-  const appTitle = "Today I Learned";
-
-  /*   const onToggleForm = () => {
-    setShowForm((prevState) => !prevState);
-  }; */
 
   return (
     <>
-      {/* HEADER */}
-      <header className="header">
-        <div className="logo">
-          <img
-            src="logo.png"
-            height="68"
-            width="68"
-            alt="Today I Learned Logo"
-          />
-          <h1>{appTitle}</h1>
-        </div>
-        <button
-          className="btn btn-large btn-open"
-          // 3. Update State variable
-          // onClick={setShowForm((show) => !show)} OBS! Throws rendering error!
-          //onClick={onToggleForm}  OBS! Proposed solution that works!
-          onClick={() => (showForm ? setShowForm(false) : setShowForm(true))}
-        >
-          Share A Fact
-        </button>
-      </header>
+      <Header showForm={showForm} setShowForm={setShowForm} />
 
-      {/* 2. Use State variable */}
       {showForm ? <NewFactForm /> : null}
 
       <main className="main">
@@ -105,6 +77,31 @@ function App() {
         <FactsList />
       </main>
     </>
+  );
+}
+
+function Header({ showForm, setShowForm }) {
+  const appTitle = "Today I Learned";
+
+  /*   const onToggleForm = () => {
+    setShowForm((prevState) => !prevState);
+  }; */
+
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="logo.png" height="68" width="68" alt="Today I Learned Logo" />
+        <h1>{appTitle}</h1>
+      </div>
+      <button
+        className="btn btn-large btn-open"
+        // onClick={setShowForm((show) => !show)} OBS! Throws rendering error!
+        //onClick={onToggleForm}  OBS! Proposed solution that works!
+        onClick={() => (showForm ? setShowForm(false) : setShowForm(true))}
+      >
+        {showForm ? "Close" : "Share A Fact"}
+      </button>
+    </header>
   );
 }
 
