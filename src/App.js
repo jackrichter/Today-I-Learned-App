@@ -69,9 +69,9 @@ function App() {
 
   const appTitle = "Today I Learned";
 
-  const onToggleForm = () => {
-    setShowForm(!showForm);
-  };
+  /*   const onToggleForm = () => {
+    setShowForm((prevState) => !prevState);
+  }; */
 
   return (
     <>
@@ -90,8 +90,8 @@ function App() {
           className="btn btn-large btn-open"
           // 3. Update State variable
           // onClick={setShowForm((show) => !show)} OBS! Throws rendering error!
-          //onClick={() => (showForm ? setShowForm(false) : setShowForm(true))} OBS! This works!
-          onClick={onToggleForm}
+          //onClick={onToggleForm}  OBS! Proposed solution that works!
+          onClick={() => (showForm ? setShowForm(false) : setShowForm(true))}
         >
           Share A Fact
         </button>
