@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./style.css";
 
 const CATEGORIES = [
@@ -45,6 +46,21 @@ const initialFacts = [
   },
 ];
 
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <span style={{ fontSize: "40px" }}>{count}</span>
+      <button
+        className="btn btn-large"
+        onClick={() => setCount((num) => num + 1)}
+      >
+        +1
+      </button>
+    </div>
+  );
+}
+
 // Each function in JSX is a component. App is allways the first component.
 function App() {
   const appTitle = "Today I Learned";
@@ -66,6 +82,7 @@ function App() {
       </header>
 
       <NewFactForm />
+      <Counter />
 
       <main className="main">
         <CategoryFilter />
@@ -80,7 +97,25 @@ function NewFactForm() {
 }
 
 function CategoryFilter() {
-  return <aside>category filter</aside>;
+  return (
+    <aside>
+      <ul>
+        <li className="category">
+          <button className="btn btn-all-categories">All</button>
+        </li>
+        {CATEGORIES.map((cat) => (
+          <li key={cat.name} className="category">
+            <button
+              className="btn btn-category"
+              style={{ backgroundColor: cat.color }}
+            >
+              {cat.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
 }
 
 function FactsList() {

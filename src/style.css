@@ -147,7 +147,7 @@ ul {
 .btn {
   border: none;
   font-family: "Coiny", sans-serif;
-  line-height: 1;
+  line-height: 0.2;
   text-transform: uppercase;
   font-size: 17px;
   padding: 16 0 13; /* Top: 16, left and right: 0, bottom: 13 */
@@ -156,11 +156,11 @@ ul {
   color: inherit;
   border-radius: 100px;
   cursor: pointer; /* hand cursor */
-  transition: 0.3s; /* Animation: Smoth movement */
+  transition: 0.3s; /* Animation: smooth movement */
 }
 
 .btn:hover {
-  transform: scale(110%) rotate(-2deg);
+  transform: scale(110%) rotate(-2deg); /* Animation: buttons tilting */
 }
 
 .btn-large {
