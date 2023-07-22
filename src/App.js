@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import supabase from "./supabase";
 import "./style.css";
 
 const CATEGORIES = [
@@ -65,7 +66,17 @@ const initialFacts = [
 // Each function in JSX is a component. App is allways the first component.
 function App() {
   const [showForm, setShowForm] = useState(false);
-  const [facts, setFacts] = useState(initialFacts);
+  const [facts, setFacts] = useState([]);
+
+  // Runs only once as soon as the component is initialized. The empty Array garantees that
+  useEffect(function () {
+    async function getFacts() {
+      // eslint-disable-next-line no-unused-vars
+      const { data: facts, error } = await supabase.from("facts").select("*");
+      setFacts(facts);
+    }
+    getFacts();
+  }, []);
 
   return (
     <>
