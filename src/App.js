@@ -68,23 +68,33 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [facts, setFacts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState("all");
 
   // Runs only once as soon as the component is initialized. The empty Array garantees that
-  useEffect(function () {
-    async function getFacts() {
-      setIsLoading(true);
-      const { data: facts, error } = await supabase
-        .from("facts")
-        .select("*")
-        .order("votesInteresting", { ascending: false })
-        .limit(1000);
+  useEffect(
+    function () {
+      async function getFacts() {
+        setIsLoading(true);
 
-      if (!error) setFacts(facts);
-      else alert("There was a problem getting data");
-      setIsLoading(false);
-    }
-    getFacts();
-  }, []);
+        // build the query string
+        let query = supabase.from("facts").select("*");
+        if (currentCategory !== "all") {
+          query = query.eq("category", currentCategory);
+        }
+
+        // Upon 'await' the data fatching itself occurs
+        const { data: facts, error } = await query
+          .order("votesInteresting", { ascending: false })
+          .limit(1000);
+
+        if (!error) setFacts(facts);
+        else alert("There was a problem getting data");
+        setIsLoading(false);
+      }
+      getFacts();
+    },
+    [currentCategory] // The dependency Array must be provide with the currentCategory for useEffect to work properly after the component is initialized!!! Only then, the getsFacts is called when the category changes!!!
+  );
 
   return (
     <>
@@ -95,7 +105,7 @@ function App() {
       ) : null}
 
       <main className="main">
-        <CategoryFilter />
+        <CategoryFilter setCurrentCategory={setCurrentCategory} />
         {isLoading ? <Loader /> : <FactsList facts={facts} />}
       </main>
     </>
@@ -209,18 +219,24 @@ function NewFactForm({ setFacts, setShowForm }) {
   );
 }
 
-function CategoryFilter() {
+function CategoryFilter({ setCurrentCategory }) {
   return (
     <aside>
       <ul>
         <li className="category">
-          <button className="btn btn-all-categories">All</button>
+          <button
+            className="btn btn-all-categories"
+            onClick={() => setCurrentCategory("all")}
+          >
+            All
+          </button>
         </li>
         {CATEGORIES.map((cat) => (
           <li key={cat.name} className="category">
             <button
               className="btn btn-category"
               style={{ backgroundColor: cat.color }}
+              onClick={() => setCurrentCategory(cat.name)}
             >
               {cat.name}
             </button>
@@ -233,6 +249,14 @@ function CategoryFilter() {
 
 function FactsList(props) {
   // Attention: Destructuring ({ facts }) is a better way of doing things. This is just to demonstrate the use of 'props'
+
+  if (props.facts.length === 0)
+    return (
+      <p className="message">
+        No facts for this category yet! Create the first one👌
+      </p>
+    );
+
   return (
     <section>
       <ul className="fact-list">
@@ -240,7 +264,10 @@ function FactsList(props) {
           <Fact key={fact.id} fact={fact} /> // JSX elements directly inside a map() call always need keys! // There must be a unique key for each fact!
         ))}
       </ul>
-      <p>There are {props.facts.length} facts currently in the database.</p>
+      <p>
+        There are {props.facts.length} facts currently in the database. Add your
+        own
+      </p>
     </section>
   );
 }
