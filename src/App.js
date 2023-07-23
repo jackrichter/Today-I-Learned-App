@@ -106,7 +106,11 @@ function App() {
 
       <main className="main">
         <CategoryFilter setCurrentCategory={setCurrentCategory} />
-        {isLoading ? <Loader /> : <FactsList facts={facts} />}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <FactsList facts={facts} setFacts={setFacts} />
+        )}
       </main>
     </>
   );
@@ -188,7 +192,7 @@ function NewFactForm({ setFacts, setShowForm }) {
       setIsUploading(false);
 
       // 4. Add the new fact to the UI: Add the new fact to the state which reloads the UI and thus display the new fact
-      setFacts((facts) => [newFact[0], ...facts]);
+      if (!error) setFacts((facts) => [newFact[0], ...facts]);
 
       // 5. Reset the input fields
       setText("");
@@ -264,10 +268,8 @@ function CategoryFilter({ setCurrentCategory }) {
   );
 }
 
-function FactsList(props) {
-  // Attention: Destructuring ({ facts }) is a better way of doing things. This is just to demonstrate the use of 'props'
-
-  if (props.facts.length === 0)
+function FactsList({ facts, setFacts }) {
+  if (facts.length === 0)
     return (
       <p className="message">
         No facts for this category yet! Create the first one👌
@@ -277,21 +279,38 @@ function FactsList(props) {
   return (
     <section>
       <ul className="fact-list">
-        {props.facts.map((fact) => (
-          <Fact key={fact.id} fact={fact} /> // JSX elements directly inside a map() call always need keys! // There must be a unique key for each fact!
+        {facts.map((fact) => (
+          <Fact key={fact.id} fact={fact} setFacts={setFacts} /> // JSX elements directly inside a map() call always need keys! // There must be a unique key for each fact!
         ))}
       </ul>
       <p>
-        There are {props.facts.length} facts currently in the database. Add your
-        own
+        There are {facts.length} facts currently in the database. Add your own
       </p>
     </section>
   );
 }
 
 // Passing props (and using JS destructuring) to a component
-function Fact({ fact }) {
+function Fact({ fact, setFacts }) {
   // <=> const { fact } = props; <=> const fact = props.fact;
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  async function handleVote(columnName) {
+    setIsUpdating(true);
+    const { data: updatedFact, error } = await supabase
+      .from("facts")
+      .update({ [columnName]: fact[columnName] + 1 })
+      .eq("id", fact.id)
+      .select();
+    setIsUpdating(false);
+
+    console.log(updatedFact);
+    if (!error)
+      setFacts((facts) =>
+        facts.map((f) => (f.id === fact.id ? updatedFact[0] : f))
+      );
+  }
+
   return (
     <li className="fact">
       <p>
@@ -315,9 +334,21 @@ function Fact({ fact }) {
         {fact.category}
       </span>
       <div className="vote-buttons">
-        <button>👍{fact.votesInteresting}</button>
-        <button>🤯{fact.votesMindblowing}</button>
-        <button>⛔{fact.votesFalse}</button>
+        <button
+          onClick={() => handleVote("votesInteresting")}
+          disabled={isUpdating}
+        >
+          👍{fact.votesInteresting}
+        </button>
+        <button
+          onClick={() => handleVote("votesMindblowing")}
+          disabled={isUpdating}
+        >
+          🤯{fact.votesMindblowing}
+        </button>
+        <button onClick={() => handleVote("votesFalse")} disabled={isUpdating}>
+          ⛔{fact.votesFalse}
+        </button>
       </div>
     </li>
   );
