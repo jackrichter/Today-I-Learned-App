@@ -9,7 +9,7 @@ body {
   background-color: #1c1917; /* Colors from Tailwind Colors CSS */
   color: #fafaf9;
   font-family: "Sono", sans-serif;
-  padding: 48px 64px;
+  padding: 48px 64px 0px;
 }
 
 .hidden {
@@ -22,6 +22,12 @@ body {
   font-size: 32px;
   font-weight: 600;
   margin-top: 24px;
+}
+
+.disputed {
+  color: #ef4444;
+  font-weight: 600;
+  margin-right: 10px;
 }
 
 /* Main Layout */
@@ -42,12 +48,19 @@ body {
   display: grid; /* Make Main container have grid layout */
   grid-template-columns: 250px 1fr; /* Two colums where the second one occupies all remaining space */
   gap: 48px;
+
+  height: calc(100vh - 48px - 68px - 40px);
 }
 
 @media (max-width: 900px) {
   .main {
     grid-template-columns: 1fr; /* One column on a very small screen */
   }
+}
+
+section {
+  overflow: scroll;
+  padding-bottom: 40px;
 }
 
 /* Elements */
@@ -232,7 +245,7 @@ ul {
 
 @media (max-width: 1000px) {
   body {
-    padding: 32px 48px;
+    /* padding: 32px 48px; */
   }
   .fact-form {
     flex-direction: column;
